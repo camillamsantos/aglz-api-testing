@@ -4,7 +4,7 @@ import assertions from '../support/api/assertions'
 
 
 context('Ping', () => {
-    it('GET Healthcheck', () => {
+    it('Validar que a aplicação está no ar', () => {
         //requests
         Requests.getPing().then(getPingResponse => {
             assertions.shouldHaveStatus(getPingResponse, 201)

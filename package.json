@@ -1,5 +1,6 @@
 {
   "devDependencies": {
+    "cy-spok": "github:bahmutov/cy-spok",
     "cypress": "^5.3.0"
   }
 }
