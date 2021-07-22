@@ -6,6 +6,9 @@ import assertions from '../support/api/assertions'
 
 
 context('Bookink', () => {
+    before(() => {
+        Requests.doAuth()
+    });
 
     it('Validar o contrato do GET booking', () => {
         Requests.getBooking().then(getBookingResponse => {
@@ -29,10 +32,7 @@ context('Bookink', () => {
         })
     });
 
-    //tentar alterar uma reserva sem token -> 403
-    //tentar alterar uma reserva com token invalido -> 403
-    //alterar uma reserva com sucess- > 200
-    it.only('Tentar alterar uma reserva sem token', () => {
+    it('Tentar alterar uma reserva sem token', () => {
         Requests.postBooking().then(postBookingResponse => {
             Requests.updateBookingWithoutToken(postBookingResponse).then(putBookingResponse => {
                 assertions.shouldHaveStatus(putBookingResponse, 403)
@@ -40,9 +40,53 @@ context('Bookink', () => {
         })
 
     });
+    it('Alterar uma reserva com sucesso', () => {
+        Requests.postBooking().then(postBookingResponse => {
+            Requests.updateBooking(postBookingResponse).then(putBookingResponse => {
+                assertions.shouldHaveStatus(putBookingResponse, 200)
+            })
+        })
+
+    });
+
+    it('Tentar excluir uma reserva sem token', () => {
+
+    });
+
+    it('Tentar excluir uma reserva com token inválido', () => {
+
+    });
+    it('Excluir uma reserva com sucesso', () => {
+        Requests.postBooking().then(postBookingResponse => {
+            Requests.deleteBooking(postBookingResponse).then(deleteBookingResponse => {
+                assertions.shouldHaveStatus(deleteBookingResponse, 201)
+            })
+        })
+
+
+
+    });
 });
 
 // 1. autenticação
 // 2. failOnStatusCode
 // 3. reserva existente -> testes independentes
+
+// 2xx
+// 3xx
+
+// 1xx
+// 4xx
+// 5xx
+
+//tentar alterar uma reserva inexistente -> 405
+//tentar alterar uma reserva sem token -> 403 - ok
+//tentar alterar uma reserva com token invalido -> 403 - ok
+//alterar uma reserva com sucesso- > 200 - ok
+
+//tentar excluir uma reserva inexistente -> 405
+//tentar excluir uma reserva sem token -> 403 -
+//tentar excluir uma reserva com token invalido -> 403
+//excluir uma reserva com sucesso -> 201 - ok
+
 
