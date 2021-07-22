@@ -5,12 +5,12 @@ import schemas from '../support/api/schemas'
 import assertions from '../support/api/assertions'
 
 
-context('Bookink', () => {
+context('Booking', () => {
     before(() => {
         Requests.doAuth()
     });
 
-    it('Validar o contrato do GET booking', () => {
+    it('Validar o contrato do GET booking @contract', () => {
         Requests.getBooking().then(getBookingResponse => {
             cy.log(getBookingResponse.status)
             assertions
@@ -21,7 +21,7 @@ context('Bookink', () => {
         })
 
     });
-    it('Criar uma reserva com sucesso', () => {
+    it('Criar uma reserva com sucesso @functional', () => {
         Requests.postBooking().then(postBookingResponse => {
             assertions.shouldHaveStatus(postBookingResponse, 200)
 
@@ -32,7 +32,7 @@ context('Bookink', () => {
         })
     });
 
-    it('Tentar alterar uma reserva sem token', () => {
+    it('Tentar alterar uma reserva sem token @functional', () => {
         Requests.postBooking().then(postBookingResponse => {
             Requests.updateBookingWithoutToken(postBookingResponse).then(putBookingResponse => {
                 assertions.shouldHaveStatus(putBookingResponse, 403)
@@ -40,7 +40,7 @@ context('Bookink', () => {
         })
 
     });
-    it('Alterar uma reserva com sucesso', () => {
+    it('Alterar uma reserva com sucesso @functional', () => {
         Requests.postBooking().then(postBookingResponse => {
             Requests.updateBooking(postBookingResponse).then(putBookingResponse => {
                 assertions.shouldHaveStatus(putBookingResponse, 200)
@@ -49,14 +49,14 @@ context('Bookink', () => {
 
     });
 
-    it('Tentar excluir uma reserva sem token', () => {
+    it('Tentar excluir uma reserva sem token @functional', () => {
 
     });
 
-    it('Tentar excluir uma reserva com token inválido', () => {
+    it('Tentar excluir uma reserva com token inválido @functional', () => {
 
     });
-    it('Excluir uma reserva com sucesso', () => {
+    it('Excluir uma reserva com sucesso @functional', () => {
         Requests.postBooking().then(postBookingResponse => {
             Requests.deleteBooking(postBookingResponse).then(deleteBookingResponse => {
                 assertions.shouldHaveStatus(deleteBookingResponse, 201)
@@ -89,4 +89,22 @@ context('Bookink', () => {
 //tentar excluir uma reserva com token invalido -> 403
 //excluir uma reserva com sucesso -> 201 - ok
 
+
+//categorização dos testes
+// 1. prioridade
+// criticos
+// medios
+//baixa
+// 2. tipos
+//healthcheck
+//contrato
+//funcionais
+// 3. funcionalidade
+//ping
+//booking
+//auth
+
+// --spec - define somente uma spec por execução
+
+// plugin para selecionar testes: cypress-select-test
 
