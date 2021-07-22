@@ -1,7 +1,8 @@
 # aglz-api-testing
 
 
-# Projeto Chapter 4 aglz-api-testing - Bootcamp Cypress - Turma 6 - 
+# Projeto Chapter 4 aglz-api-testing - Bootcamp Cypress - Turma 6 
+
 
 ## Bootcamp Agilizei 
 
@@ -12,19 +13,19 @@
 
 Projeto desenvolvido para o bootcamp turma 6 agilizei - https://agilizei.com/agilizei-bootcamp/
 
-# Tecnologias
+## Tecnologias
 
   - Cypress @ 5.3.0
   - NodeJS @ v14.17.3
   - NPM @ 7.19.1
 
-# Plugins
+## Plugins
 
   - cypress-select-tests
   - cypress-grep
   
 
-# Passos para executar o projeto
+## Passos para executar o projeto
 
   - Clonar o repositório
   - Dentro da raiz do projeto, executar o comando [npm install]
