@@ -1,4 +1,4 @@
-# aglz-api-testing
+# Desafio 4 - N4
 
 
 # Projeto Chapter 4 aglz-api-testing - Bootcamp Cypress - Turma 6 
@@ -13,6 +13,14 @@
 
 Projeto desenvolvido para o bootcamp turma 6 agilizei - https://agilizei.com/agilizei-bootcamp/
 
+# Desafio
+
+  - Criar novos testes para api de treinamento
+  - Subir o projeto para o github
+  - Implementar a integração contínua usando o GhActions
+
+# Passos para executar o projeto
+
 ## Tecnologias
 
   - Cypress @ 5.3.0
@@ -23,7 +31,22 @@ Projeto desenvolvido para o bootcamp turma 6 agilizei - https://agilizei.com/agi
 
   - cypress-select-tests
   - cypress-grep
+  - cy-spok
   
+  # Validação dos Testes:
+
+- Tentar alterar uma reserva inexistente -> 405
+- Tentar alterar uma reserva sem token -> 403 
+- Alterar uma reserva com sucesso- > 200 
+- Excluir uma reserva com sucesso -> 201
+
+## Itens do desafio: 
+
+- Tentar alterar uma reserva com token invalido -> 403
+- Tentar excluir uma reserva inexistente -> 405
+- Tentar excluir uma reserva sem token -> 403
+- Tentar excluir uma reserva com token invalido -> 403
+
 
 ## Passos para executar o projeto
 

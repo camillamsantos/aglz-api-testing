@@ -9,7 +9,7 @@ class Requests {
     getBooking() {
         return cy.request({
             method: 'GET',
-            url: 'booking/1',
+            url: 'booking/11',
         })
     }
     postBooking() {
@@ -31,7 +31,7 @@ class Requests {
         })
 
     }
-    updateBookingWithoutToken(response){
+    updateBookingWithoutToken(response) {
         const id = response.body.bookingid
 
         return cy.request({
@@ -43,15 +43,15 @@ class Requests {
                 "totalprice": 111,
                 "depositpaid": false,
                 "bookingdates": {
-                  "checkin": "2020-01-01",
-                  "checkout": "2020-01-02"
+                    "checkin": "2020-01-01",
+                    "checkout": "2020-01-02"
                 },
                 "additionalneeds": "Lunch"
-              },
-              failOnStatusCode: false
+            },
+            failOnStatusCode: false
         })
     }
-    updateBooking(response){
+    updateBooking(response) {
         const id = response.body.bookingid
 
         return cy.request({
@@ -66,34 +66,34 @@ class Requests {
                 "totalprice": 111,
                 "depositpaid": false,
                 "bookingdates": {
-                  "checkin": "2020-01-01",
-                  "checkout": "2020-01-02"
+                    "checkin": "2020-01-01",
+                    "checkout": "2020-01-02"
                 },
                 "additionalneeds": "Lunch"
-              },
-              failOnStatusCode: false
+            },
+            failOnStatusCode: false
         })
     }
 
-    postAuth(){
-       return cy.request({
+    postAuth() {
+        return cy.request({
             method: 'POST',
             url: 'auth',
             body: {
-              "username"  : "admin",
-              "password": "password123"
+                "username": "admin",
+                "password": "password123"
             }
         })
     }
 
-    doAuth(){
+    doAuth() {
         this.postAuth().then(authResponse => {
             const token = authResponse.body.token
             Cypress.env('token', token)
         })
     }
 
-    deleteBooking(response){
+    deleteBooking(response) {
         const id = response.body.bookingid
         return cy.request({
             method: 'DELETE',
@@ -104,7 +104,91 @@ class Requests {
             failOnStatusCode: false
         })
     }
-    
+
+    updateBookingWithInvalidToken(response) {
+        const id = response.body.bookingid
+        return cy.request({
+            method: 'PUT',
+            url: `booking/${id}`,
+            headers: {
+                Cookie: `token=${Cypress.env(123)}`
+            },
+            body: {
+                "firstname": "Jim",
+                "lastname": "James Jr",
+                "totalprice": 191,
+                "depositpaid": false,
+                "bookingdates": {
+                    "checkin": "2020-12-11",
+                    "checkout": "2020-12-12"
+                },
+                "additionalneeds": "Breakfast"
+            },
+            failOnStatusCode: false
+        })
+    }
+
+    updateNonExistentBooking(response) {
+        const id = 1009
+        return cy.request({
+            method: 'PUT',
+            url: `booking/${id}`,
+            headers: {
+                Cookie: `token=${Cypress.env('token')}`
+            },
+            body: {
+                "firstname": "Jim",
+                "lastname": "James Jr",
+                "totalprice": 191,
+                "depositpaid": false,
+                "bookingdates": {
+                    "checkin": "2020-12-11",
+                    "checkout": "2020-12-12"
+                },
+                "additionalneeds": "Breakfast"
+            },
+            failOnStatusCode: false
+        })
+    }
+
+    deleteBookingWithoutToken(response) {
+        const id = response.body.bookingid
+        return cy.request({
+            method: 'DELETE',
+            url: `booking/${id}`,
+            failOnStatusCode: false
+        })
+    }
+
+
+    //revisar
+
+    deleBookingInvalidToken(response) {
+        const id = response.body.bookingid
+        return cy.request({
+            method: 'DELETE',
+            url: `booking/${id}`,
+            headers: {
+                Cookie: `token=${Cypress.env(123)}`
+            },
+            failOnStatusCode: false
+        })
+    }
+
+
+    //revisar
+    deleteNonExistentBooking(response) {
+        const id = 123
+        return cy.request({
+            method: 'DELETE',
+            url: `booking/${id}`,
+            headers: {
+                Cookie: `token=${Cypress.env('token')}`
+            },
+            failOnStatusCode: false
+        })
+    }
+
 }
 
 export default new Requests()

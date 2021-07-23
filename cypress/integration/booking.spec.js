@@ -10,7 +10,7 @@ context('Booking', () => {
         Requests.doAuth()
     });
 
-    it('Validar o contrato do GET booking @contract', () => {
+    it.only('Validar o contrato do GET booking @contract', () => {
         Requests.getBooking().then(getBookingResponse => {
             cy.log(getBookingResponse.status)
             assertions
@@ -48,12 +48,42 @@ context('Booking', () => {
         })
 
     });
+    //Itens do desafio:
+
+    it('Tentar alterar uma reserva com token inválido @functional', () => {
+        Requests.postBooking().then(postBookingResponse => {
+            Requests.updateBookingWithInvalidToken(postBookingResponse).then(putBookingResponse => {
+                assertions.shouldHaveStatus(putBookingResponse, 403)
+                assertions.shouldHaveDefaultHeaders(putBookingResponse)
+            })
+        })
+    })
+
+    it('Tentar alterar uma reserva inexistente @functional', () => {
+        Requests.postBooking().then(postBookingResponse => {
+            Requests.updateNonExistentBooking(postBookingResponse).then(putBookingResponse => {
+                assertions.shouldHaveStatus(putBookingResponse, 405)
+                assertions.shouldMessageInvalidMethod(putBookingResponse)
+            })
+        })
+    })
 
     it('Tentar excluir uma reserva sem token @functional', () => {
-
+        Requests.postBooking().then(postBookingResponse => {
+            Requests.deleteBookingWithoutToken(postBookingResponse).then(deleteBookingResponse => {
+                assertions.shouldHaveStatus(deleteBookingResponse, 403)
+                assertions.shouldHaveDefaultHeaders(deleteBookingResponse)
+            })
+        })
     });
 
     it('Tentar excluir uma reserva com token inválido @functional', () => {
+        Requests.postBooking().then(postBookingResponse => {
+            Requests.deleBookingInvalidToken(postBookingResponse).then(deleteBookingResponse => {
+                assertions.shouldHaveStatus(deleteBookingResponse, 403)
+                assertions.shouldHaveDefaultHeaders(deleteBookingResponse)
+            })
+        })
 
     });
     it('Excluir uma reserva com sucesso @functional', () => {
@@ -63,6 +93,14 @@ context('Booking', () => {
             })
         })
 
+        it('Tentar excluir uma reserva inexistente @functional', () => {
+            Requests.postBooking().then(postBookingResponse => {
+                Requests.deleteNonExistentBooking(postBookingResponse).then(deleteBookingResponse => {
+                    assertions.shouldHaveStatus(deleteBookingResponse, 405)
+                    assertions.shouldMessageInvalidMethod(deleteBookingResponse)
+                })
+            })
+        })
 
 
     });
@@ -79,14 +117,14 @@ context('Booking', () => {
 // 4xx
 // 5xx
 
-//tentar alterar uma reserva inexistente -> 405
+//tentar alterar uma reserva inexistente -> 405 - ok
 //tentar alterar uma reserva sem token -> 403 - ok
 //tentar alterar uma reserva com token invalido -> 403 - ok
 //alterar uma reserva com sucesso- > 200 - ok
 
-//tentar excluir uma reserva inexistente -> 405
-//tentar excluir uma reserva sem token -> 403 -
-//tentar excluir uma reserva com token invalido -> 403
+//tentar excluir uma reserva inexistente -> 405 - ok
+//tentar excluir uma reserva sem token -> 403 - ok
+//tentar excluir uma reserva com token invalido -> 403 - ok
 //excluir uma reserva com sucesso -> 201 - ok
 
 
