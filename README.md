@@ -39,9 +39,9 @@ Projeto desenvolvido para o bootcamp turma 6 agilizei - https://agilizei.com/agi
 Caso deseje visualizar a reprodução dos vídeos após executar os testes em modo headless, basta acessar o diretório cypress/videos. 
 A seguir seguem gifs com testes executados em modo headless via console do VScode. 
 
-  - Testes em modo headless via console do VsCode ![headless]![headless](https://user-images.githubusercontent.com/84816792/126723238-5fe95dae-772b-4faf-8e0b-e0e45350a72a.gif)
+  - Testes em modo headless via console do VsCode ![headless](https://user-images.githubusercontent.com/84816792/126723238-5fe95dae-772b-4faf-8e0b-e0e45350a72a.gif)
   
-  - Vídeo do teste Booking e Ping ![booking e ping]![ping e booking](https://user-images.githubusercontent.com/84816792/126723279-94121080-2600-4481-93f7-f34ea45151f6.gif)
+  - Vídeo do teste Booking e Ping ![ping e booking](https://user-images.githubusercontent.com/84816792/126723279-94121080-2600-4481-93f7-f34ea45151f6.gif)
 
 
   
