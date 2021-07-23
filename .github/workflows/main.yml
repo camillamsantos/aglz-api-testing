@@ -40,8 +40,8 @@ jobs:
 	    
     # executar os filtros de testes contract
     - run: npm run test:contract
-	
-	# executar os filtros de testes functional
+    
+    # executar os filtros de testes functional
     - run: npm run test:functional
     
 
