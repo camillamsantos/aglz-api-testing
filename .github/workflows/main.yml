@@ -37,7 +37,7 @@ jobs:
     
     # executar os filtros de testes healthcheck
     - run: npm run test:healthcheck
-	    
+    
     # executar os filtros de testes contract
     - run: npm run test:contract
     
