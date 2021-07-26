@@ -7,5 +7,5 @@ cypress/downloads
 #others
 
 package-lock.json
-node_modules
+./node_modules
 
