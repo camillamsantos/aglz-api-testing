@@ -10,7 +10,7 @@ context('Booking', () => {
         Requests.doAuth()
     });
 
-    it.only('Validar o contrato do GET booking @contract', () => {
+    it('Validar o contrato do GET booking @contract', () => {
         Requests.getBooking().then(getBookingResponse => {
             cy.log(getBookingResponse.status)
             assertions
